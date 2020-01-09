@@ -7,15 +7,9 @@
 
 #include <func.h>
 
-int func()
-{
-    printf("func\n");
-    return 0;
-}
 
 int main()
 {
-    func();
     char *env[] = {"hello","123","456",NULL};
     if(execv("./print_arg",env)< 0)
     {
