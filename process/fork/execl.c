@@ -12,7 +12,8 @@ int main(int argc,char* argv[])
 {
     printf("before execl\n");
     /* execl(argv[1],argv[2],argv[3],NULL); */
-    execl("./print","hello","123",NULL);
+    /* execl("./print","hello","123",NULL); */
+    execl("/bin/sh","sh","-c","ls -l",NULL);
     printf("before execl\n");
     return 0;
 }
