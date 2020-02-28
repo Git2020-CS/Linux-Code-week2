@@ -14,9 +14,9 @@ int shmGet1(char* file)
     printf("key = %d\n",key);
 
     //如果对应的key还没有创建共享内存，就创建新的，如果已经创建，就获取id
-    int shmid = shmget(key,4096,IPC_CREAT);
-    int shmid1 = shmget(IPC_PRIVATE,4096,IPC_CREAT|0600);
-    printf("shmid1 = %d\n",shmid1);
+    /* int shmid = shmget(key,4096,IPC_CREAT); */
+    int shmid = shmget(0,4096,IPC_CREAT);
+    ERROR_CHECK(shmid,-1,"shmget");
 
     // 增加了IPC_EXCL后，如果key对应的共享内存已经创建，会返回-1.
     /* int shmid = shmget(key,4096,IPC_CREAT|IPC_EXCL); */ 

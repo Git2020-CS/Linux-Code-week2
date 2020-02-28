@@ -3,7 +3,6 @@
 	> Author: Name
 	> Mail: Name@163.com 
 	> Created Time: 2020-01-13 21:38:44
-    > 从共享内存中读取数据,共享内存中的数据读取后不会消失，下次读仍然能读出来
  ************************************************************************/
 
 #include <func.h>
@@ -14,18 +13,16 @@ int main(int argc,char *argv[])
     ERROR_CHECK(shmid,-1,"shmget");
     /* printf("shmid = %d\n",shmid); */
 
-    /* int shmid_private = shmget(IPC_PRIVATE,4096,IPC_CREAT); */
+    char *p = (char*)shmat(shmid,0,0);
+    ERROR_CHECK(p,(char*)-1,"shmat");
+    strcpy(p,"hello");
+    printf("p=%p\n",p);
 
-    // 传递字符串
-    /* char *p = (char*)shmat(shmid,0,0); */
-    /* ERROR_CHECK(p,(char*)-1,"shmat"); */
-    /* puts(p); */
-    /* printf("p=%s\n",p); */
-    /* printf("p=%p\n",p); */
+    /* int* p1 = (int*)shmat(shmid1,0,0); */
+    /* printf("p1=%p\n",p1); */
 
-    // 传递整形数
-    int *p = (int*)shmat(shmid,0,0);
-    printf("p=%d\n",*p);
+    // 将共享内存段与进程空间分离
+    shmdt(p);
 
     while(1);
 

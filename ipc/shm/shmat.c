@@ -9,14 +9,11 @@
 
 int main(int argc,char *argv[])
 {
-    int shmid = shmget(1000,4096,IPC_CREAT|0600);
+    int shmid = shmget(0,4096,IPC_CREAT|0600);
+    shmget(IPC_PRIVATE,4096,IPC_CREAT|0600);
     ERROR_CHECK(shmid,-1,"shmget");
-    /* printf("shmid = %d\n",shmid); */
-    /* int shmid1 = shmget(1000,4096,IPC_CREAT); */
+    printf("shmid = %d\n",shmid);
 
-    /* int shmid_private = shmget(IPC_PRIVATE,4096,IPC_CREAT); */
-
-    /* printf("buf = %p\n",buf); */
     char *p = (char*)shmat(shmid,0,0);
     ERROR_CHECK(p,(char*)-1,"shmat");
     strcpy(p,"hello");
